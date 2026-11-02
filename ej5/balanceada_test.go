@@ -1,8 +1,5 @@
 package ej5
 
-
-package ej5
-
 import "testing"
 
 func TestBalanceada(t *testing.T) {
