@@ -8,12 +8,16 @@ func TestBalanceada(t *testing.T) {
         formula  string
         esperado bool
     }{
-        {"Cierre correcto", "()", true},
-        {"Simbolos correctos", "{([])}", true},
-        {"Sin cerrar", "((", false},
-        {"Cierre incorrecto", "{[(])}", false},
-        {"Con letras", "=SUMA(A1:B4)", true},
-        {"Formula vacia", "", true},
+
+{"Cierre correcto", "()", true},
+{"Simbolos correctos", "{([])}", true},
+{"Sin cerrar", "((", false},
+{"Cierre incorrecto", "{[(])}", false},
+{"Con letras", "=SUMA(A1:B4)", true},
+{"Formula vacia", "", true},
+{"Parentesis sin cerrar", "(", false},
+{"Letra sola", "a", true},
+
     }
 
     for _, caso := range casos {
