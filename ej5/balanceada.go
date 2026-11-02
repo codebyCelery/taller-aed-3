@@ -17,7 +17,6 @@ func BalanceadaOriginal(formula string) bool {
 	return true
 }
 
-
 func Balanceada(formula string) bool {
     pares := map[rune]rune{
         ')': '(',
@@ -31,14 +30,20 @@ func Balanceada(formula string) bool {
         if c == '(' || c == '[' || c == '{' {
             p.Push(c)
 
+        // Solo los símbolos de cierre deben sacar elementos.
+        // Así evitamos que las letras provoquen errores.
         } else if c == ')' || c == ']' || c == '}' {
             tope, err := p.Pop()
 
+            // Comparamos el cierre con su apertura correcta.
+            // El código original rechazaba fórmulas bien cerradas.
             if err != nil || tope != pares[c] {
                 return false
             }
         }
     }
 
-    return p.IsEmpty()
+    // Comprobamos que no queden símbolos abiertos.
+    // Antes se aceptaban fórmulas incompletas como "((".
+    return p.Vacia()
 }
