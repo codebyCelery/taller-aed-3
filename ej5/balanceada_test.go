@@ -13,7 +13,7 @@ func TestBalanceada(t *testing.T) {
         {"Sin cerrar", "((", false},
         {"Cierre incorrecto", "{[(])}", false},
         {"Con letras", "=SUMA(A1:B4)", true},
-        {"Formula vacia", "", false},
+        {"Formula vacia", "", true},
     }
 
     for _, caso := range casos {
