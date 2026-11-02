@@ -1,13 +1,32 @@
 package ej5
 
-// ======================= AQUÍ ESCRIBES =======================
-// Una prueba con tabla (go test), llamada TestBalanceada:
-//   - Una lista de casos, cada uno con: nombre, formula, esperado (bool).
-//   - Incluye las ENTRADAS MÍNIMAS que encontraste: una que demuestre
-//     el primer defecto y otra que demuestre el segundo.
-//   - Incluye también casos que ya funcionan bien (para comprobar
-//     que no rompiste nada).
-//   - Recorre la tabla con un for y usa t.Run y t.Errorf.
-// La prueba debe FALLAR llamando a BalanceadaOriginal
-// y PASAR llamando a Balanceada.
-// =============================================================
+
+package ej5
+
+import "testing"
+
+func TestBalanceada(t *testing.T) {
+    casos := []struct {
+        nombre   string
+        formula  string
+        esperado bool
+    }{
+        {"Cierre correcto", "()", true},
+        {"Simbolos correctos", "{([])}", true},
+        {"Sin cerrar", "((", false},
+        {"Cierre incorrecto", "{[(])}", false},
+        {"Con letras", "=SUMA(A1:B4)", true},
+        {"Formula vacia", "", false},
+    }
+
+    for _, caso := range casos {
+        t.Run(caso.nombre, func(t *testing.T) {
+            obtenido := Balanceada(caso.formula)
+
+            if obtenido != caso.esperado {
+                t.Errorf("Esperaba %v, pero salio %v",
+                    caso.esperado, obtenido)
+            }
+        })
+    }
+}
