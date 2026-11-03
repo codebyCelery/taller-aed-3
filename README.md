@@ -5,7 +5,7 @@ Cada ejercicio con código está en su propia carpeta. Busquen el texto
 
 | Ejercicio | Carpeta | Responsable | Rama |
 |---|---|---|---|
-| 5 · Balanceada | `ej5/` | Madelein (revisa Celery) | `ej5-balanceada` |
+| 5 · Balanceada | `ej5/` | Madelein | `ej5-balanceada` |
 | 6 · Cola con 2 pilas | `ej6/` | Celery | `ej6-cola` |
 | 7 · Navegador con límite 5 | `ej7/` | Celery | `ej7-navegador` |
 | 8 · BST con repetidos | `ej8/` | Leticia | `ej8-bst` |
