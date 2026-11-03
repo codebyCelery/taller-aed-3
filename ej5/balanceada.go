@@ -1,5 +1,6 @@
-// EJERCICIO 5 · Responsable: Madelein · Revisa: Celery
 package ej5
+
+// EJERCICIO 5 - Responsable: Madelein - Revisa: Celery
 
 func BalanceadaOriginal(formula string) bool {
 	pares := map[rune]rune{')': '(', ']': '[', '}': '{'}
