@@ -1,42 +1,45 @@
 // EJERCICIO 7 · Responsable: Celery
 package main
 
-// Navegador del enunciado. Funciona, pero guarda TODO el historial.
+// maxHistorial es el límite de páginas en atras, contando la actual.
+const maxHistorial = 5
+
+// Navegador con el historial de atrás limitado a 5 páginas.
 type Navegador struct {
-	atras    Pila[string] // el tope es la página actual
+	atras    Deque[string] // CAMBIO: antes era Pila. Frente = más antigua, final = actual
 	adelante Pila[string]
 }
 
 func (n *Navegador) Visitar(url string) {
-	n.atras.Push(url)
-	n.adelante = Pila[string]{}
+	n.atras.PushBack(url)
+	// CAMBIO: si pasamos de 5, descartamos la más antigua (por el frente).
+	if n.atras.Len() > maxHistorial {
+		n.atras.PopFront()
+	}
+	n.adelante = Pila[string]{} // una visita nueva borra el "adelante"
 }
 
 func (n *Navegador) Atras() {
-	if len(n.atras.items) > 1 {
-		url, _ := n.atras.Pop()
+	// Solo se puede retroceder si hay más de una página (la actual no cuenta).
+	if n.atras.Len() > 1 {
+		url, _ := n.atras.PopBack() // CAMBIO: se saca por el final del deque
 		n.adelante.Push(url)
 	}
 }
 
 func (n *Navegador) Adelante() {
 	if url, err := n.adelante.Pop(); err == nil {
-		n.atras.Push(url)
+		n.atras.PushBack(url) // CAMBIO: se vuelve a agregar por el final
 	}
 }
 
 func (n *Navegador) Actual() string {
-	return n.atras.items[len(n.atras.items)-1]
+	return n.atras.items[len(n.atras.items)-1] // la actual es el último del deque
 }
 
-// ======================= AQUÍ ESCRIBES =======================
-// Modifica este archivo para cumplir el requisito nuevo: atras guarda
-// como máximo las 5 últimas páginas (contando la actual). Al visitar
-// una sexta, se descarta la más antigua.
-//   1. Cambia el tipo de atras por la estructura que respondiste en P7.E
-//      (escríbela en un archivo nuevo, por ejemplo deque.go).
-//   2. Cambia Visitar, Atras, Adelante y Actual para usarla.
-//   3. Escribe una función que devuelva el estado de atras y adelante
-//      para poder imprimirlo en main.go.
-// Comenta con // qué hace cada cambio.
-// =============================================================
+// Estado devuelve atras (de la más antigua a la actual) y adelante
+// (del fondo al tope) como copias, solo para poder imprimirlas.
+func (n *Navegador) Estado() ([]string, []string) {
+	return append([]string(nil), n.atras.items...),
+		append([]string(nil), n.adelante.items...)
+}
