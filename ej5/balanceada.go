@@ -35,8 +35,8 @@ func Balanceada(formula string) bool {
         } else if c == ')' || c == ']' || c == '}' {
             tope, err := p.Pop()
 
-            // Comparamos el cierre con su apertura correcta.
-            // El código original rechazaba fórmulas bien cerradas.
+            // Comparamos el cierre con la apertura que le corresponde.
+            // Si no coincide o no hay apertura, la fórmula es incorrecta.
             if err != nil || tope != pares[c] {
                 return false
             }
