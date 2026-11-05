@@ -1,10 +1,33 @@
-package main
-
 func main() {
-	// ======================= AQUÍ ESCRIBES =======================
-	// 1. Inserta, en este orden: 14, 11, 17, 11, 9, 14, 20, 14, 12, 20.
-	// 2. Elimina, en este orden: 14, 11, 17, 14, 14.
-	// 3. Imprime el inorden final. Debe COINCIDIR con P8.IN de la hoja.
-	// Se ejecuta con:  go run ./ej8
-	// =============================================================
+	var raiz *Nodo
+
+	notas := []int{14, 11, 17, 11, 9, 14, 20, 14, 12, 20}
+
+	// Insertar notas
+	for _, v := range notas {
+		raiz = insertar(raiz, v)
+	}
+
+	fmt.Println("Arbol inicial:")
+	inorden(raiz)
+	fmt.Println()
+
+	fmt.Println("Cantidad de 14:", cantidad(raiz, 14))
+	fmt.Println("Cantidad de 11:", cantidad(raiz, 11))
+	fmt.Println("Cantidad de 20:", cantidad(raiz, 20))
+
+	// Eliminar notas
+	eliminaciones := []int{14, 11, 17, 14, 14}
+
+	for _, v := range eliminaciones {
+		raiz = eliminar(raiz, v)
+	}
+
+	fmt.Println("\nArbol final:")
+	inorden(raiz)
+	fmt.Println()
+
+	fmt.Println("Cantidad de 14:", cantidad(raiz, 14))
+	fmt.Println("Cantidad de 11:", cantidad(raiz, 11))
+	fmt.Println("Cantidad de 20:", cantidad(raiz, 20))
 }
