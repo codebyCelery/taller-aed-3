@@ -1,10 +1,22 @@
 package main
 
+import "fmt"
+
 func main() {
-	// ======================= AQUÍ ESCRIBES =======================
-	// 1. Inserta, en este orden: 14, 11, 17, 11, 9, 14, 20, 14, 12, 20.
-	// 2. Elimina, en este orden: 14, 11, 17, 14, 14.
-	// 3. Imprime el inorden final. Debe COINCIDIR con P8.IN de la hoja.
-	// Se ejecuta con:  go run ./ej8
-	// =============================================================
+	var raiz *Nodo
+
+	// Inserta las notas del enunciado, en orden.
+	for _, v := range []int{14, 11, 17, 11, 9, 14, 20, 14, 12, 20} {
+		raiz = insertar(raiz, v)
+	}
+
+	// Elimina las notas del enunciado, en orden.
+	for _, v := range []int{14, 11, 17, 14, 14} {
+		raiz = eliminar(raiz, v)
+	}
+
+	// Imprime el inorden final: debe coincidir con P8.IN de la hoja.
+	fmt.Print("Inorden final: ")
+	inorden(raiz)
+	fmt.Println()
 }

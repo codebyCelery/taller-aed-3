@@ -20,7 +20,7 @@ func insertar(n *Nodo, v int) *Nodo {
 	} else if v > n.Nota {
 		n.Der = insertar(n.Der, v)
 	} else {
-		n.Cantidad++ //esta es la modificacion 
+		n.Cantidad++ //esta es la modificacion
 	}
 
 	return n
